@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppECM.View.MainPageMaster">
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView x:Name="MenuItemsListView"
+              SeparatorVisibility="None"
+              HasUnevenRows="true"           
+              IsGroupingEnabled="True"
+              ItemsSource="{Binding Groups}">
+                <ListView.Header>
+                    <Grid BackgroundColor="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="80"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Image Source="heroplaceholder.png" Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="3" Aspect="AspectFill" />
+                        <Label
+                          x:Name="lblNameUser"
+                          Grid.Column="1"
+                          Grid.Row="2"
+                          TextColor="White"
+                          FontFamily="Calibre"
+                          FontAttributes="Bold"
+                          Margin="0,20,20,0"
+                          FontSize="Small"                        
+                          Text="{Binding usuario.Name}"
+                          Style="{DynamicResource SubtitleStyle}"/>
+                    </Grid>
+                </ListView.Header>
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout BackgroundColor="#C1CDCD" Orientation="Vertical" HeightRequest="0.5" >
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="14,14" HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+
+                                <Image Source="{Binding Image}"  Margin="0,0,20,0"/>
+
+                                <Label VerticalOptions="FillAndExpand" 
+                                   VerticalTextAlignment="Center" 
+                                   TextColor="Black"
+                                   Text="{Binding Title}" 
+                                   FontAttributes="Bold"
+                                   FontSize="11"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

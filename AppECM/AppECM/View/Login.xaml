@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppECM.View.Login">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="primary">#E3F2FD</Color>
+            <Color x:Key="secund">#007AC2</Color>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView BackgroundColor="{StaticResource secund}" Padding="15">
+            <StackLayout Spacing="10" Margin="0,50,0,0">
+                <StackLayout  HeightRequest="110" HorizontalOptions="FillAndExpand">
+                    <Image x:name="imgLogo" Source="logoprincipal"  HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+
+                <Label Text="Sistema para Avaliação -  Ecommerce " 
+                        HorizontalOptions="Center" 
+                        TextColor="{StaticResource primary}"
+                        FontSize="Micro"/>
+
+                <Entry  Margin="20,40,20,0" 
+                         HeightRequest="50" 
+                         Placeholder="Digite seu Usuario"
+                         Text="{Binding NowAuthenticate.User.UserName}">
+                </Entry>
+
+                <Entry Margin="20,0,20,0" 
+                        HeightRequest="50" IsPassword="true"
+                        Placeholder="Digite sua Senha"                       
+                       Text="{Binding NowAuthenticate.User.Password}">
+                </Entry>
+
+                <Button Margin="20,0,20,0" 
+                         HeightRequest="50" 
+                         TextColor="Black" 
+                         Text="Login"  
+                         Command="{Binding CommandLogin}"
+                         CommandParameter="{Binding .}"                       
+                         BackgroundColor="{StaticResource primary}"
+                         HorizontalOptions="FillAndExpand"/>
+
+                <Label Text="{Binding  NowAuthenticate.Message}" 
+                        HorizontalOptions="Center" 
+                        TextColor="{StaticResource primary}"/>
+
+                <ActivityIndicator
+                           IsVisible="{Binding IsBusy}"
+                           IsRunning="{Binding IsBusy}"
+                           Color="Black" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

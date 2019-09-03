@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppECM.Cell.CellHistPedido">
+    
+    
+  <ContentView.Content>
+      <StackLayout>
+            <StackLayout>
+
+                <AbsoluteLayout HorizontalOptions="StartAndExpand">
+                    <Grid Padding="18" ColumnSpacing="18">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".3*"/>
+                            <ColumnDefinition Width=".5*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout VerticalOptions="Center"  Spacing="0" >
+
+                            <Label VerticalOptions="Center" HorizontalOptions="StartAndExpand" Text="Pedido:"/>
+                          
+
+                        </StackLayout>
+                        <StackLayout VerticalOptions="Center" Grid.Column="1" Spacing="0">
+                            <Label VerticalOptions="Center"  Text="{Binding pedidoformatado}"/>
+
+                        </StackLayout>
+
+                    </Grid>
+                    <RelativeLayout>
+                        <BoxView Color="Gray" Opacity="0.2" HeightRequest="190"       
+                          RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                          IsVisible="{Binding Disable}" />
+                    </RelativeLayout>
+                </AbsoluteLayout>
+
+            </StackLayout>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

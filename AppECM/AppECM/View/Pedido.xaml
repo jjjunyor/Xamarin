@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters1="clr-namespace:AppECM"
+             xmlns:behavior="clr-namespace:AppECM.Behavior"
+             xmlns:local="clr-namespace:AppECM.Cell"
+             x:Class="AppECM.View.Pedido">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters1:ItemVisibilityEventArgstemConverter x:Key="ItemVisibilityConverter" />
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout  Spacing="{DynamicResource CardSpacing}"
+                             Padding="{DynamicResource CardPadding}">
+            <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <ListView                     
+                    x:Name="ServiceOrderListView"
+                    ItemsSource="{Binding Produtos}"
+                    HasUnevenRows ="True"
+                    RowHeight="110"                  
+                    IsPullToRefreshEnabled= "{Binding IsNotBusy}"
+                    RefreshCommand="{Binding ForceRefreshCommand}"
+                    IsRefreshing="{Binding IsBusy, Mode=OneWay}" 
+                    CachingStrategy="RecycleElement"
+                    IsVisible="{Binding IsNotBusy}"    
+                    AbsoluteLayout.LayoutFlags="All" 
+                    AbsoluteLayout.LayoutBounds="0,0,1,1">
+                    <ListView.SeparatorColor>
+                        <OnPlatform x:TypeArguments="Color" iOS="{StaticResource ListSeparator}" Android="Transparent"/>
+                    </ListView.SeparatorColor>
+                    <ListView.Behaviors>
+                        <behavior:ListViewPagningBehavior                                 
+				                	Command="{Binding LoadMoreCommand}"
+				                	Converter="{StaticResource ItemVisibilityConverter}">
+                        </behavior:ListViewPagningBehavior>
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell StyleId="disclosure">
+                                <local:CellDetalhePedido></local:CellDetalhePedido>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout IsVisible="{Binding IsBusy}" 
+                                   AbsoluteLayout.LayoutFlags="PositionProportional"
+                                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1">
+                    <StackLayout.Orientation>
+                        <OnPlatform x:TypeArguments="StackOrientation" iOS="Horizontal"/>
+                    </StackLayout.Orientation>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}">
+                        <ActivityIndicator.Color>
+                            <OnPlatform x:TypeArguments="Color" Android="{StaticResource Accent}"/>
+                        </ActivityIndicator.Color>
+                    </ActivityIndicator>
+                </StackLayout>
+            </AbsoluteLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
